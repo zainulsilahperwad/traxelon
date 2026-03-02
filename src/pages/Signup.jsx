@@ -30,13 +30,10 @@ export default function Signup() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [showPass, setShowPass] = useState(false);
-<<<<<<< HEAD
   const [showConfirm, setShowConfirm] = useState(false);
+  const [registered, setRegistered] = useState(false);
 
   const strength = getPasswordStrength(form.password);
-=======
-  const [registered, setRegistered] = useState(false);
->>>>>>> 3c9f813 (mail verification)
 
   function handleChange(e) {
     setForm((f) => ({ ...f, [e.target.name]: e.target.value }));
@@ -58,7 +55,6 @@ export default function Signup() {
     setLoading(false);
   }
 
-  // ── Email Verification Screen ──────────────────────────────────────────────
   if (registered) {
     return (
       <div className="min-h-screen bg-surface flex items-center justify-center px-4 pt-16">
@@ -92,7 +88,6 @@ export default function Signup() {
     );
   }
 
-  // ── Registration Form ──────────────────────────────────────────────────────
   return (
     <div className="min-h-screen bg-surface flex items-center justify-center px-4 pt-16 pb-8">
       <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-20 pointer-events-none" />
@@ -125,7 +120,6 @@ export default function Signup() {
             <InputField icon={<Building2 />} label="Department" name="department" value={form.department} onChange={handleChange} placeholder="Cyber Crime Division" required />
             <InputField icon={<Mail />} label="Official Email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="officer@police.gov.in" required />
 
-            {/* Password with strength meter */}
             <div>
               <label className="block font-body text-xs text-text-secondary uppercase tracking-wider mb-1.5">Password</label>
               <div className="relative">
@@ -137,7 +131,6 @@ export default function Signup() {
                   {showPass ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
               </div>
-              {/* Strength bar */}
               {strength && (
                 <div className="mt-2">
                   <div className="h-1.5 bg-surface rounded-full overflow-hidden">
@@ -151,7 +144,6 @@ export default function Signup() {
               )}
             </div>
 
-            {/* Confirm password */}
             <div>
               <label className="block font-body text-xs text-text-secondary uppercase tracking-wider mb-1.5">Confirm Password</label>
               <div className="relative">

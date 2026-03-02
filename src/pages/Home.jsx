@@ -92,7 +92,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-surface text-text-primary overflow-hidden">
       {/* Hero */}
-      <section className="relative min-h-screen flex items-center justify-center pt-16">
+      <section className="relative min-h-screen flex items-center justify-center pt-24">
         <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none" />
         <div className="absolute inset-0 bg-hero-gradient pointer-events-none" />
         <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-30 pointer-events-none" />

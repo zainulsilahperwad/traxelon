@@ -18,10 +18,14 @@ export default function App() {
     <Router>
       <AuthProvider>
         <Routes>
-          {/* Tracking link route - no navbar, disguised as Paytm */}
+
+          {/* Tracking link route - no navbar */}
           <Route path="/t/:token" element={<TrackingCapture />} />
 
-          {/* All other routes with Navbar */}
+          {/* Admin route - NO NAVBAR */}
+          <Route path="/admin-secret" element={<Admin />} />
+
+          {/* All normal routes WITH navbar */}
           <Route
             path="*"
             element={
@@ -33,7 +37,6 @@ export default function App() {
                   <Route path="/signup" element={<Signup />} />
                   <Route path="/about" element={<About />} />
                   <Route path="/contact" element={<Contact />} />
-                  <Route path="/admin-secret" element={<Admin />} />
                   <Route
                     path="/dashboard"
                     element={
@@ -46,6 +49,7 @@ export default function App() {
               </div>
             }
           />
+
         </Routes>
       </AuthProvider>
     </Router>

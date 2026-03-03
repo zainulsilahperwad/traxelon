@@ -74,7 +74,7 @@ export default function Contact() {
         <div className="absolute inset-0 bg-hero-gradient pointer-events-none" style={{ zIndex: 1 }} />
         <div className="absolute inset-0 bg-grid-pattern bg-grid opacity-30 pointer-events-none" style={{ zIndex: 2 }} />
         {/* Scan line — BEHIND text using z-index 3, text is z-10 */}
-        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-30 animate-scan-line pointer-events-none" style={{ zIndex: 3 }} />
+        <div className="absolute left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary to-transparent opacity-10 animate-scan-line pointer-events-none" style={{ zIndex: 1 }} />
 
         {/* Content — always on top */}
         <div className="relative max-w-5xl mx-auto px-6 text-center" style={{ zIndex: 10 }}>
@@ -84,11 +84,16 @@ export default function Contact() {
               Support · Mon–Sat · 9AM–6PM IST
             </span>
           </div>
-          <h1 className="font-display text-7xl md:text-9xl text-text-primary leading-none mb-6 tracking-wider">
+
+          {/* <h1 className="font-display text-7xl md:text-9xl text-text-primary leading-none mb-6 tracking-wider">
             CONTACT<br />
             <span className="text-primary" style={{ textShadow: "0 0 40px rgba(0,212,255,0.5)" }}>
               US.
             </span>
+          </h1> */}
+
+          <h1 className="font-display text-7xl md:text-9xl text-text-primary leading-none mb-6 tracking-wider">
+            CONTACT <span className="text-primary" style={{ textShadow: "0 0 40px rgba(0,212,255,0.5)" }}>US.</span>
           </h1>
           <p className="font-body text-lg text-text-secondary max-w-xl mx-auto leading-relaxed">
             For technical support, new registrations, or partnership inquiries.
@@ -137,7 +142,7 @@ export default function Contact() {
                 </a>
               </div>
 
-              <div className="relative mx-4 mb-4 rounded-xl overflow-hidden border border-surface-border" style={{ height: 220 }}>
+              {/* <div className="relative mx-4 mb-4 rounded-xl overflow-hidden border border-surface-border" style={{ height: 220 }}>
                 <iframe
                   title="SurePass Academy Location"
                   width="100%"
@@ -157,6 +162,24 @@ export default function Contact() {
                 </div>
                 <div className="w-8 h-8 bg-primary/10 border border-primary/20 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary/20 transition-all">
                   <ExternalLink className="w-3.5 h-3.5" />
+                </div>
+              </a> */}
+
+              <a href={MAPS_URL} target="_blank" rel="noreferrer"
+                className="relative mx-4 mb-4 rounded-xl overflow-hidden border border-surface-border block"
+                style={{ height: 320 }}>
+                <iframe
+                  title="SurePass Academy Location"
+                  width="100%"
+                  height="100%"
+                  frameBorder="0"
+                  style={{ filter: "invert(90%) hue-rotate(180deg) saturate(0.7) brightness(0.85)", pointerEvents: "none" }}
+                  src={`https://maps.google.com/maps?q=SurePass+Academy+Mangalore&ll=${LAT},${LON}&z=17&output=embed`}
+                  allowFullScreen
+                />
+                <div className="absolute bottom-3 right-3 bg-surface/90 border border-primary/30 rounded-lg px-3 py-1.5 flex items-center gap-1.5">
+                  <ExternalLink className="w-3 h-3 text-primary" />
+                  <span className="font-mono text-xs text-primary">Open in Maps</span>
                 </div>
               </a>
             </div>

@@ -221,12 +221,12 @@ export default function Home() {
                 {
                   num: "02",
                   title: "Generate Tracking Link",
-                  desc: "Login to your dashboard, enter a case label and click Generate. A disguised GPay link is created instantly.",
+                  desc: "A Traxelon tracking link is created instantly that redirects to any URL you choose.",
                 },
                 {
                   num: "03",
                   title: "Send Link to Suspect",
-                  desc: "Share the link via WhatsApp, SMS or email. The suspect sees a GPay lucky draw page — completely unaware.",
+                  desc: "Share the link via WhatsApp, SMS or email. The suspect sees a normal webpage — completely unaware they're being tracked.",
                 },
                 {
                   num: "04",
@@ -261,7 +261,7 @@ export default function Home() {
               </div>
               <div className="p-5 font-mono text-xs space-y-3 min-h-64">
                 <div className="text-primary">$ traxelon --generate-link --case "Suspect-047"</div>
-                <div className="text-text-muted">→ Generating disguised GPay link...</div>
+                <div className="text-text-muted">→ Generating disguised link...</div>
                 <div className="text-green-400">✓ Link created: https://traxelon.app/t/x9k2p...</div>
                 <div className="text-text-muted">→ Sending to target device...</div>
                 <div className="text-primary mt-2">$ traxelon --monitor --case "Suspect-047"</div>

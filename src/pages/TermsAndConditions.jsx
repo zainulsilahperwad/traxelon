@@ -9,7 +9,7 @@ const sections = [
     title: "Eligibility & Access",
     content: [
       "Traxelon is exclusively available to verified, active-duty law enforcement officers, government investigators, and authorized personnel of Indian state and central police departments.",
-      "Access is granted only upon successful verification of a valid government-issued Badge ID, official email address (ending in .gov.in or equivalent), and departmental authorization.",
+      "Access is granted only upon successful verification of a valid government-issued Badge ID, official email address, and departmental authorization.",
       "Any attempt to access this platform without valid credentials constitutes unauthorized access under Section 66 of the Information Technology Act, 2000 and is liable for criminal prosecution.",
       "Users must be at least 18 years of age and must be currently employed by a recognized law enforcement or government investigative agency.",
     ],
@@ -206,8 +206,8 @@ export default function TermsAndConditions() {
         <div className="bg-surface-elevated border border-surface-border rounded-2xl p-6 mt-4">
           <p className="font-body text-sm text-text-muted">
             For legal inquiries regarding these Terms, contact:{" "}
-            <a href="mailto:support@traxalon.gov.in" className="text-primary hover:underline">
-              support@traxalon.gov.in
+            <a href="mailto:support@traxelon.com" className="text-primary hover:underline">
+              support@traxelon.com
             </a>
             {" "}· Torsecure Cyber LLP ,Door No. 4-9-765/17, Second Floor, Manasa Towers, MG Road, Kodialbail, Mangalore, Karnataka
           </p>

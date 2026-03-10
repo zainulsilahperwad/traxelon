@@ -138,7 +138,7 @@ export default function Contact() {
       </section>
 
       <div className="max-w-5xl mx-auto px-6 py-16">
-        <div className="grid md:grid-cols-5 gap-8 items-stretch">
+        <div className="grid grid-cols-1 md:grid-cols-5 gap-8 md:items-stretch">
 
           <div className="md:col-span-2 flex flex-col gap-4">
             <div className="bg-surface-elevated border border-surface-border rounded-2xl p-6 space-y-5">
@@ -175,21 +175,24 @@ export default function Contact() {
                   <ExternalLink className="w-3 h-3" /> Open Maps
                 </a>
               </div>
+
               <a href={MAPS_URL} target="_blank" rel="noreferrer"
-                className="relative mx-4 mb-4 rounded-xl overflow-hidden border border-surface-border block"
-                style={{ minHeight: 380, height: "100%" }}>
-                <iframe
-                  title="Traxelon Location"
-                  width="100%"
-                  height="100%"
-                  frameBorder="0"
-                  style={{
-                    filter: "invert(90%) hue-rotate(180deg) saturate(0.7) brightness(0.85)",
-                    pointerEvents: "none",
-                  }}
-                  src={`https://maps.google.com/maps?q=12.8766748,74.8415473&ll=12.8766748,74.8415473&z=17&output=embed`}
-                  allowFullScreen
-                />
+              className="relative mx-4 mb-4 rounded-xl overflow-hidden border border-surface-border block"
+              style={{ height: 400 }}>
+              <iframe
+                title="Traxelon Location"
+                width="100%"
+                height="400"
+                frameBorder="0"
+                style={{
+                  display: "block",
+                  filter: "invert(90%) hue-rotate(180deg) saturate(0.7) brightness(0.85)",
+                  pointerEvents: "none",
+                }}
+                src={`https://maps.google.com/maps?q=12.8766748,74.8415473&ll=12.8766748,74.8415473&z=17&output=embed`}
+                allowFullScreen
+              />
+
                 <div className="absolute bottom-3 right-3 bg-surface/90 border border-primary/30 rounded-lg px-3 py-1.5 flex items-center gap-1.5 backdrop-blur-sm">
                   <ExternalLink className="w-3 h-3 text-primary" />
                   <span className="font-mono text-xs text-primary">Open in Maps</span>
@@ -219,7 +222,7 @@ export default function Contact() {
                     <FormInput label="Full Name" name="name" value={form.name} onChange={handleChange} placeholder="Officer Name" required />
                     <FormInput label="Badge ID" name="badge" value={form.badge} onChange={handleChange} placeholder="KA-2024-001" />
                   </div>
-                  <FormInput label="Official Email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="officer@police.gov.in" required />
+                  <FormInput label="Official Email" name="email" type="email" value={form.email} onChange={handleChange} placeholder="officer@traxelon.com" required />
                   <FormInput label="Subject" name="subject" value={form.subject} onChange={handleChange} placeholder="Technical issue / New registration / Other" required />
                   <div>
                     <label className="block font-body text-xs text-text-secondary uppercase tracking-wider mb-1.5">Message</label>
@@ -247,13 +250,18 @@ export default function Contact() {
                     )}
                   </div>
 
-                  <HCaptcha
-                    sitekey="2c7ab4e4-6cd4-43fa-9416-57f458ea07c6"
-                    onVerify={(token) => setCaptchaToken(token)}
-                    onExpire={() => setCaptchaToken(null)}
-                    ref={hcaptchaRef}
-                    theme="dark"
-                  />
+               <div className="w-full overflow-hidden">
+              <div style={{ transform: "scale(0.85)", transformOrigin: "left center" }}
+                  className="md:scale-100">
+                <HCaptcha
+                  sitekey="2c7ab4e4-6cd4-43fa-9416-57f458ea07c6"
+                  onVerify={(token) => setCaptchaToken(token)}
+                  onExpire={() => setCaptchaToken(null)}
+                  ref={hcaptchaRef}
+                  theme="dark"
+                />
+              </div>
+            </div>
 
                   <button type="submit" disabled={sending}
                     className="w-full px-6 py-3.5 bg-primary text-surface font-body font-bold rounded-lg hover:bg-primary-dark transition-all shadow-glow flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">

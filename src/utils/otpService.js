@@ -4,7 +4,7 @@
  */
 
 const BACKEND_URL =
-    import.meta.env.VITE_BACKEND_URL || "http://localhost:5001";
+    import.meta.env.REACT_APP_BACKEND_URL || "http://localhost:5001";
 
 /**
  * Ask the backend to generate and send an OTP to the given email.

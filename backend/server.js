@@ -10,27 +10,47 @@ dotenv.config();
 const app = express();
 const PORT = process.env.PORT || 5001;
 
+// --- UPDATED CORS CONFIGURATION ---
+const allowedOrigins = [
+    "http://localhost:3000",
+    "http://localhost:5173",
+    "https://traxelon-main.vercel.app",
+    "https://traxelon-ochre.vercel.app", // Your new deployment URL
+];
+
 app.use(cors({
-    origin: [
-        "http://localhost:3000",
-        "http://localhost:5173",
-        "https://traxelon-main.vercel.app",
-        "https://traxelon-main-git-thondekai-pranavs-projects-3ac675c8.vercel.app",
-        // Add your Vercel URL here
-    ],
-    methods: ["GET", "POST", "OPTIONS"],
+    origin: function (origin, callback) {
+        // Allow requests with no origin (like mobile apps or curl)
+        if (!origin) return callback(null, true);
+        
+        const isAllowed = allowedOrigins.indexOf(origin) !== -1 || 
+                          origin.includes(".vercel.app"); // Allows all your vercel subdomains
+        
+        if (isAllowed) {
+            callback(null, true);
+        } else {
+            callback(new Error("Not allowed by CORS"));
+        }
+    },
+    methods: ["GET", "POST", "OPTIONS", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true
 }));
+// ---------------------------------
 
 app.use(express.json({limit:'10mb'}));
 
 app.get("/", (_req, res) => {
-    res.json({ status: "Traxelon backend running ✅", version: "1.0.0" });
+    res.json({ 
+        status: "Traxelon backend running ✅", 
+        version: "1.0.0",
+        environment: process.env.NODE_ENV || "development"
+    });
 });
 
 app.use("/api/links", linksRouter);
 app.use("/api/auth", authRouter);
-app.use("/api/contact",contactRouter);
+app.use("/api/contact", contactRouter);
 
 app.use((req, res) => {
     res.status(404).json({ error: "Route not found" });

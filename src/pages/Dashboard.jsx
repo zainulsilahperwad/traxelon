@@ -63,31 +63,48 @@ export default function Dashboard() {
     const q = queryStr.toLowerCase();
     if (!captures || captures.length === 0) return "Negative. No signal packets found for this link.";
 
-    if (q.includes("ip") || q.includes("address") || q.includes("network")) {
-      const ips = [...new Set(captures.map(c => c.ip))].filter(Boolean);
-      return `Network Analysis: Identified ${ips.length} unique IP(s): ${ips.join(", ")}.`;
+    // Get the most recent capture for specific detail queries
+    const latest = captures[captures.length - 1];
+
+    // 1. Network & Infrastructure
+    if (q.includes("ip") || q.includes("asn") || q.includes("network") || q.includes("isp")) {
+      return `Network Analysis: Target is routing through ${latest.isp || "an unknown ISP"} (ASN: ${latest.asn || "N/A"}). Public IP: ${latest.ip}.`;
     }
     
-    if (q.includes("where") || q.includes("location") || q.includes("city") || q.includes("country")) {
-      const locs = [...new Set(captures.map(c => `${c.city || 'Unknown'}, ${c.country || 'Unknown'}`))];
-      return `Geospatial Lock: Target signals originate from: ${locs.join(" | ")}.`;
+    // 2. Geospatial (Location)
+    if (q.includes("where") || q.includes("location") || q.includes("city") || q.includes("map")) {
+      const loc = latest.gpsAddress || latest.city || "a redacted location";
+      return `Geospatial Lock: Signal originates from ${loc}. Coordinates: ${latest.gpsLat || "N/A"}, ${latest.gpsLon || "N/A"}.`;
     }
 
-    if (q.includes("device") || q.includes("phone") || q.includes("hardware") || q.includes("os")) {
-      const devices = [...new Set(captures.map(c => `${c.device || 'Unknown'} (${c.os || 'Unknown'})`))];
-      return `Hardware Profile: Targets are utilizing ${devices.join(" and ")}.`;
+    // 3. Hardware & Power
+    if (q.includes("battery") || q.includes("power") || q.includes("charge")) {
+      return `Power Intelligence: Device is at ${latest.batteryLevel || "unknown"}% battery and is currently ${latest.isCharging === "true" ? "CHARGING" : "DISCHARGING"}.`;
     }
 
-    if (q.includes("vpn") || q.includes("proxy") || q.includes("secure") || q.includes("risk")) {
-      const suspicious = captures.filter(c => c.isProxy === "true" || c.isTor === "true" || c.isVpn === "true").length;
-      return `Risk Report: ${suspicious} out of ${captures.length} signals show active anonymization (VPN/Proxy/Tor).`;
+    if (q.includes("cpu") || q.includes("ram") || q.includes("hardware") || q.includes("memory")) {
+      return `Hardware Profile: Detected ${latest.cpuCores || "N/A"} CPU cores with approximately ${latest.ram || "N/A"} of RAM. Architecture: ${latest.architecture || "Unknown"}.`;
     }
 
-    if (q.includes("click") || q.includes("time") || q.includes("when")) {
-        return `Activity Log: Total of ${captures.length} intercepts recorded. Last signal received recently.`;
+    // 4. Graphics & WebGL
+    if (q.includes("gpu") || q.includes("graphics") || q.includes("renderer")) {
+      return `Graphics Report: System utilizes ${latest.gpuVendor || "Unknown Vendor"} optics. Renderer: ${latest.gpu || "Unknown"}.`;
     }
 
-    return "Forensic System Online. Ask about IPs, locations, hardware profiles, or security risks for this specific link.";
+    // 5. Security & Risk
+    if (q.includes("vpn") || q.includes("proxy") || q.includes("tor") || q.includes("security")) {
+      const isSecure = latest.isVpn === "true";
+      return isSecure 
+        ? "Risk Alert: Active anonymization (VPN/Proxy) detected on this signal." 
+        : "Security Analysis: No active VPN or Proxy tunnels detected on this intercept.";
+    }
+
+    // 6. Performance Metrics
+    if (q.includes("speed") || q.includes("performance") || q.includes("load") || q.includes("latency")) {
+      return `Performance Diagnostics: DNS Lookup: ${latest.dnsLookup || "N/A"}ms | Server Response: ${latest.serverResponse || "N/A"}ms | Total Page Load: ${latest.pageLoad || "N/A"}ms.`;
+    }
+
+    return "Forensic System Online. I can explain parameters regarding Network, Hardware, Power, Graphics, Security Risks, or Performance.";
   }
 
   const handleChatSubmit = (e) => {
